@@ -39,7 +39,7 @@ app.post('/admin/manage-user', (req, res) => {
     USERS[email] = 'password123';
     res.redirect('/admin/manage-user');
   } else {
-    res.send('Please fill in the form');
+    res.send('Please fill out the form');
   }
 });
 
