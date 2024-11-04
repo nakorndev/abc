@@ -48,13 +48,13 @@ app.get('/admin/manage-user/:email/permission', (req, res) => {
   const { email } = req.params;
   const permission = USERS[email + '_permission'] === 'true';
   res.send(`
-    <h1 class="text-3xl font-bold">Manage User Permission</h1>
-    <form class="flex flex-col" action="/admin/manage-user/${email}/permission" method="POST">
-      <label class="flex items-center">
-        <input class="mr-2" type="checkbox" name="permission" ${permission ? 'checked' : ''} />
+    <h1>Manage User Permission</h1>
+    <form action="/admin/manage-user/${email}/permission" method="POST">
+      <label>
+        <input type="checkbox" name="permission" ${permission ? 'checked' : ''} />
         Allow user to create article
       </label>
-      <button class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded" type="submit">Submit</button>
+      <button type="submit">Save</button>
     </form>
   `);
 });
