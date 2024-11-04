@@ -54,6 +54,20 @@ app.put('/profile', (req, res) => {
   }
 });
 
+// In-memory storage for articles
+const ARTICLES = [];
+
+// Handle create article
+app.post('/articles', (req, res) => {
+  const { title, body } = req.body;
+  if (title && body) {
+    ARTICLES.push({ title, body });
+    res.send('Article created successfully!');
+  } else {
+    res.send('Title and body are required');
+  }
+});
+
 const PORT = 3000;
 app.listen(PORT, () => {
   console.log(`Server is running on http://localhost:${PORT}`);
