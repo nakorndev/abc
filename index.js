@@ -41,6 +41,18 @@ app.post('/signup', (req, res) => {
   }
 });
 
+/*************  ✨ Codeium Command ⭐  *************/
+// Handle update user profile
+app.put('/profile', (req, res) => {
+  const { email, password, name } = req.body;
+  if (USERS[email] && USERS[email] === password) {
+    USERS[email] = password;
+    res.send('Profile updated!');
+  } else {
+    res.send('Invalid email or password');
+  }
+});
+
 const PORT = 3000;
 app.listen(PORT, () => {
   console.log(`Server is running on http://localhost:${PORT}`);
