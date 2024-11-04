@@ -43,6 +43,29 @@ app.post('/admin/manage-user', (req, res) => {
   }
 });
 
+// Handle admin manage user permission
+app.get('/admin/manage-user/:email/permission', (req, res) => {
+  const { email } = req.params;
+  const permission = USERS[email + '_permission'] === 'true';
+  res.send(`
+    <h1>Manage User Permission</h1>
+    <form action="/admin/manage-user/${email}/permission" method="POST">
+      <label>
+        <input type="checkbox" name="permission" ${permission ? 'checked' : ''} />
+        Allow user to create article
+      </label>
+      <button type="submit">Save</button>
+    </form>
+  `);
+});
+
+app.post('/admin/manage-user/:email/permission', (req, res) => {
+  const { email } = req.params;
+  const { permission } = req.body;
+  USERS[email + '_permission'] = permission;
+  res.redirect('/admin/manage-user');
+});
+
 // Render login form
 app.get('/login', (req, res) => {
   res.send(`
