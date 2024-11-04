@@ -9,6 +9,15 @@ const USERS = {
   'user@example.com': 'password123'
 };
 
+// Handle homepage
+app.get('/', (req, res) => {
+  res.send(`
+    <h1>Welcome!</h1>
+    <p><a href="/login">Login</a></p>
+    <p><a href="/admin">Admin</a></p>
+  `);
+});
+
 // Handle admin login
 app.post('/admin', (req, res) => {
   const { email, password } = req.body;
