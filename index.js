@@ -1,8 +1,8 @@
+/*************  ✨ Codeium Command 🌟  *************/
 const express = require('express');
-const bodyParser = require('body-parser');
 
 const app = express();
-app.use(bodyParser.urlencoded({ extended: true }));
+app.use(express.urlencoded({ extended: true }));
 
 // Dummy user data
 const USERS = {
@@ -41,7 +41,6 @@ app.post('/signup', (req, res) => {
   }
 });
 
-/*************  ✨ Codeium Command ⭐  *************/
 // Handle update user profile
 app.put('/profile', (req, res) => {
   const { email, password, name, avatar } = req.body;
@@ -72,3 +71,4 @@ const PORT = 3000;
 app.listen(PORT, () => {
   console.log(`Server is running on http://localhost:${PORT}`);
 });
+
