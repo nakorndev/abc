@@ -19,6 +19,30 @@ app.post('/admin', (req, res) => {
   }
 });
 
+// Handle admin manage user
+app.get('/admin/manage-user', (req, res) => {
+  res.send(`
+    <h1>Manage User</h1>
+    <form action="/admin/manage-user" method="POST">
+      <input type="email" name="email" placeholder="Email" required />
+      <button type="submit">Add User</button>
+    </form>
+    <ul>
+    ${Object.keys(USERS).map(email => `<li>${email}</li>`).join('')}
+    </ul>
+  `);
+});
+
+app.post('/admin/manage-user', (req, res) => {
+  const { email } = req.body;
+  if (email) {
+    USERS[email] = 'password123';
+    res.redirect('/admin/manage-user');
+  } else {
+    res.send('Please fill in the form');
+  }
+});
+
 // Render login form
 app.get('/login', (req, res) => {
   res.send(`
