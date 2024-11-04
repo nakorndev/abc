@@ -66,6 +66,24 @@ app.post('/admin/manage-user/:email/permission', (req, res) => {
   res.redirect('/admin/manage-user');
 });
 
+// Handle admin manage article
+app.post('/admin/articles/manage', (req, res) => {
+  const { email, password, action, articleIndex, articleData } = req.body;
+  if (email === 'admin' && password === 'admin') {
+    if (action === 'delete' && ARTICLES[articleIndex]) {
+      ARTICLES.splice(articleIndex, 1);
+      res.send('Article deleted successfully!');
+    } else if (action === 'update' && ARTICLES[articleIndex]) {
+      ARTICLES[articleIndex] = articleData;
+      res.send('Article updated successfully!');
+    } else {
+      res.send('Invalid action or article index');
+    }
+  } else {
+    res.send('Invalid email or password');
+  }
+});
+
 // Render login form
 app.get('/login', (req, res) => {
   res.send(`
