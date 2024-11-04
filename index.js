@@ -5,8 +5,8 @@ const app = express();
 app.use(bodyParser.urlencoded({ extended: true }));
 
 // Dummy user data
-const USERS = { 
-  'user@example.com': 'password123' 
+const USERS = {
+  'user@example.com': 'password123'
 };
 
 // Render login form
@@ -27,6 +27,17 @@ app.post('/login', (req, res) => {
     res.send('Login successful!');
   } else {
     res.send('Invalid email or password');
+  }
+});
+
+// Handle sign up
+app.post('/signup', (req, res) => {
+  const { email, password } = req.body;
+  if (!USERS[email]) {
+    USERS[email] = password;
+    res.send('Sign up successful!');
+  } else {
+    res.send('Email already exists');
   }
 });
 
