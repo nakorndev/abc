@@ -9,6 +9,16 @@ const USERS = {
   'user@example.com': 'password123'
 };
 
+// Handle admin login
+app.post('/admin', (req, res) => {
+  const { email, password } = req.body;
+  if (email === 'admin' && password === 'admin') {
+    res.send('Login successful!');
+  } else {
+    res.send('Invalid email or password');
+  }
+});
+
 // Render login form
 app.get('/login', (req, res) => {
   res.send(`
